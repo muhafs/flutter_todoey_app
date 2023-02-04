@@ -1,11 +1,11 @@
 // ignore_for_file: avoid_print
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todoey_app/models/task_data.dart';
 
 class AddTaskScreen extends StatelessWidget {
-  const AddTaskScreen(this.callBackTitle, {super.key});
-
-  final Function callBackTitle;
+  const AddTaskScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,10 @@ class AddTaskScreen extends StatelessWidget {
             const SizedBox(height: 10),
             TextButton(
               onPressed: () {
-                callBackTitle(inputVal);
+                Provider.of<TaskData>(context, listen: false)
+                    .addTask(inputVal!);
+
+                Navigator.pop(context);
               },
               style: TextButton.styleFrom(
                 backgroundColor: Colors.red,
